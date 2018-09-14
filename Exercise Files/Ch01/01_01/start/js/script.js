@@ -67,11 +67,11 @@ const listWidget = (function() {
       document.querySelector('.results').classList.add('open');
     },
     updateUIWorking: function() {
-      for(var i = 0; i <= 9; i++) {
+      (function(j){
         setTimeout(function(){
-          document.querySelector('.conditions').innerHTML = `<p class=="animation">00:00.{i}</p>`;
-        }, 100 * i);
-      }
+          document.querySelector('.conditions').innerHTML = `<p class="animation">00:00.${j}</p>`;
+        }, 100 * j);
+      })(i);
     },
 
     updateUISuccess: function(response) {
