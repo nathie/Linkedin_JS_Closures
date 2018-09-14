@@ -1,18 +1,16 @@
 'use strict';
 
-function updateClicks() {  
-  let button;
-  let clicks = {};
-  
-  function reportClicks(menu) {
-    button = menu.id;
-    clicks[button] = clicks[button] + 1 || 1;
-    console.log("reportClicks", button, clicks);
+function updateClicks() {
+  let clicks = {};  
+  function reportClicks(item) {
+    clicks[item] = clicks[item] + 1 || 1;
+    console.log(item, clicks);
   }
   return reportClicks;
 }
 
-const report = updateClicks();
+const reportActivities = updateClicks();
+const reportProducts = updateClicks();
 
 const activities = {
   teamIn: ['basketball','hockey','volleyball'],
@@ -108,6 +106,13 @@ document.querySelector('.forecast-button').addEventListener('click', function(e)
 document.querySelectorAll('.options div').forEach(function(el) {
   el.addEventListener('click', function(event) {
     updateActivityList(event);
-    report(event.target);
+    reportActivities(event.target);
   }, false);
 });
+
+//update list of products when user hovers a product
+document.querySelectorAll('.product-image').forEach(function(el) {
+  el.addEventListener('mouseenter', function(event) {
+    reportProducts(event.target.nextElementSibling.textContent)
+  }, false);
+})
